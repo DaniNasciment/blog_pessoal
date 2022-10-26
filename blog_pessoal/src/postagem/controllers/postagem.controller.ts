@@ -1,8 +1,10 @@
 import { Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe } from "@nestjs/common";
-import { Body, Delete, Post, Put } from "@nestjs/common/decorators";
+import { Body, Delete, Post, Put, UseGuards } from "@nestjs/common/decorators";
+import { LocalAuthGuard } from "../../auth/guard/local-auth.guard";
 import { Postagem } from "../entities/postagem.entities";
 import { PostagemService } from "../services/postagem.service";
 
+@UseGuards(LocalAuthGuard)
 @Controller('/postagens')
 export class PostagemController {
     constructor (private readonly postagemService: PostagemService) {}
